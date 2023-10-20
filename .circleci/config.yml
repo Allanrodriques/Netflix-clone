@@ -16,7 +16,7 @@ jobs:
             echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
             docker push allan1804/netflixclone:$version
 
-Update_manifest:
+  Update_manifest:
     docker:
       - image: cimg/base:2023.06
     steps:
