@@ -16,7 +16,7 @@ jobs:
             echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
             docker push allan1804/netflixclone:$version
 
- Update_manifest:
+Update_manifest:
     docker:
       - image: cimg/base:2023.06
     steps:
@@ -40,7 +40,6 @@ jobs:
             git commit -m "new build with imgTag build-$TAG"
             git config credential.helper 'cache --timeout=120'
             git push -q https://$GITHUB_PERSONAL_TOKEN@github.com/Allanrodriques/kube_manifest.git main 
-
 workflows:
   GitOpsflow:
     jobs:
@@ -48,3 +47,6 @@ workflows:
       - Update_manifest:
           requires:
             - build_and_push
+      
+
+
