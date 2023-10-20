@@ -12,9 +12,9 @@ jobs:
           command: |
             version="build-$CIRCLE_BUILD_NUM"
             echo $version
-            docker build -t allan1804/netflixclone:$version .
+            docker build -t allan1804/netflixclone:latest .
             echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
-            docker push allan1804/netflixclone:$version
+            docker push allan1804/netflixclone:latest
 
   Update_manifest:
     docker:
