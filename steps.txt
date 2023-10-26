@@ -1,3 +1,11 @@
-> After Terraform apply
+> After Terraform stuff
 > aws eks update-kubeconfig --region us-east-1 --name Netflix-Clone
-> 
+> kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+> Create argo-manifest.yml
+> kubectl apply -f argo-manifest.yml
+> kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}'
+> kubectl port-forward svc/argocd-server 9090:443 -n argocd
+> Open argocd using DNS of load balancer which is created in load balancers 
+> kubectl get secrets -n argocd
+> kubectl get secret argocd-initial-admin-secret -n argocd -o yaml
+> echo (Password) | base64 --decode
