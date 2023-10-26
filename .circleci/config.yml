@@ -1,6 +1,28 @@
 version: 2.1
 
 jobs:
+  run_jest_tests:
+  docker:
+    - image: cimg/node:20.3.1
+  steps:
+    - checkout
+    - restore_cache:
+        keys:
+          - v1-dependencies-{{ checksum "package-lock.json" }}
+          - v1-dependencies-
+    - run:
+        name: Install Dependencies
+        command: npm install
+    - run:
+        name: Run Jest Tests
+        command: npm test
+    - persist_to_workspace:
+        root: /path/to/node_modules
+        paths:
+          - node_modules
+    - attach_workspace:
+        at: /path/to/node_modules
+
   build_and_push:
     docker:
       - image: cimg/node:20.3.1
@@ -29,6 +51,7 @@ jobs:
             ((TAG--))
             git clone https://github.com/Allanrodriques/kube_manifest.git
             git config --global user.email "allanrodriques2001@gmail.com"
+            git config --global user.name "Allanrodriques"
             git config --global user.password "$GIT_PASSWORD"
             pwd
             cd kube_manifest
